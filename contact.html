@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | Anupama</title>
+  <meta name="description" content="Contact Anupama to start a new project or collaboration. Email notifications are powered by EmailJS." />
+  <meta name="keywords" content="contact Anupama, Full Stack Developer contact, EmailJS form" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand"><a href="homePage.html">Anupama</a></div>
+    <nav class="site-nav">
+      <a href="homePage.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="project.html">Projects</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <button id="darkModeToggle" aria-label="Toggle dark mode">🌙</button>
+  </header>
+
+  <main class="main-container">
+    <section class="section-heading">
+      <h2>Contact</h2>
+      <p>Send a message and receive email notification through EmailJS. Fill in the form below to connect.</p>
+    </section>
+
+    <section class="contact-section">
+      <!-- Replace YOUR_EMAILJS_USER_ID, YOUR_SERVICE_ID, and YOUR_TEMPLATE_ID in script.js -->
+      <form id="contactForm" class="contact-form">
+        <input type="text" id="name" name="from_name" placeholder="Your Name" required />
+        <input type="email" id="email" name="reply_to" placeholder="Your Email" required />
+        <textarea id="message" name="message" rows="6" placeholder="Your Message" required></textarea>
+        <button type="submit" class="btn">Send Message</button>
+        <p id="status" class="form-status"></p>
+      </form>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
