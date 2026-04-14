@@ -47,25 +47,32 @@ const contactForm = document.getElementById("contactForm");
 if (contactForm) {
   const statusMessage = document.getElementById("status");
 
-  if (window.emailjs?.init) {
-    emailjs.init("YOUR_EMAILJS_USER_ID");
+  contactForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  statusMessage.textContent = "Sending message...";
+
+  const data = {
+    name: document.getElementById("name").value,
+    email: document.getElementById("email").value,
+    message: document.getElementById("message").value,
+  };
+
+  try {
+    const res = await fetch("http://localhost:5000/send-email", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const result = await res.text();
+    statusMessage.textContent = result;
+
+    contactForm.reset();
+  } catch (error) {
+    statusMessage.textContent = "Error sending message ❌";
   }
-
-  contactForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    if (!window.emailjs?.sendForm) {
-      statusMessage.textContent = "Email service not loaded yet. Refresh page.";
-      return;
-    }
-
-    statusMessage.textContent = "Sending message...";
-    emailjs.sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", contactForm)
-      .then(() => {
-        statusMessage.textContent = "Message sent successfully!";
-        contactForm.reset();
-      })
-      .catch(() => {
-        statusMessage.textContent = "Unable to send message right now. Please try again.";
-      });
-  });
+});
 }
