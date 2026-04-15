@@ -407,3 +407,24 @@ body.dark {
   color: #fff;
   font-size: 0.85rem;
 }
+
+.project-back {
+  overflow-y: auto;
+}
+
+.project-back p,
+.project-back ul {
+  margin: 8px 0;
+  font-size: 0.9rem;
+}
+/*  */
+
+.project-card {
+  min-height: 320px;
+}
+
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

@@ -47,32 +47,26 @@ const contactForm = document.getElementById("contactForm");
 if (contactForm) {
   const statusMessage = document.getElementById("status");
 
-  contactForm.addEventListener("submit", async (event) => {
+  emailjs.init("qajuieq6R1D_McwDv");
+
+contactForm.addEventListener("submit", function (event) {
   event.preventDefault();
 
   statusMessage.textContent = "Sending message...";
 
-  const data = {
+  emailjs.send("service_1nfjo3u", "template_utqbqdj", {
     name: document.getElementById("name").value,
     email: document.getElementById("email").value,
     message: document.getElementById("message").value,
-  };
-
-  try {
-    const res = await fetch("http://localhost:5000/send-email", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-
-    const result = await res.text();
-    statusMessage.textContent = result;
-
+  })
+  .then(() => {
+    statusMessage.textContent = "Message sent successfully ✅";
     contactForm.reset();
-  } catch (error) {
+  })
+  .catch((error) => {
+    console.error(error);
     statusMessage.textContent = "Error sending message ❌";
-  }
+  });
 });
+
 }
